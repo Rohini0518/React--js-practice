@@ -3,17 +3,18 @@
 function AutoSaveInput() {
   const [text, setText] = React.useState("");
   function saveText(e) {
-    setText(e.target.value)
-   const local= localStorage.setItem("savedText", text)
-    console.log(local,"local storage text")
-  }
+    let savedValue=e.target.value
+    setText(savedValue)
+   const local= localStorage.setItem("autosave-text", savedValue)
+const stored = localStorage.getItem("autosave-text");
+console.log(stored, "from localStorage");  }
   function removeText() {
     setText("")
-    localStorage.setItem("savedText", "")
+    localStorage.removeItem("autosave-text")
   }
   React.useEffect(() => {
-    const getText = localStorage.getItem("savedText");
-   setText(getText)
+    const getText = localStorage.getItem("autosave-text");
+   setText(getText ||"")
    },[])
  
   return (
@@ -21,11 +22,8 @@ function AutoSaveInput() {
       <h1>Auto Save Input</h1>
       <input type="text" value={text} style={{ padding: "6px" }} onChange={(e) => saveText(e) } />
       <p>text:{text}</p>
-      
-      <button style={{ padding: "8px 15px", margin: "10px", color: "white", borderRadius: "8px ", backgroundColor: "green" }} onClick={() => setText("")}>Clear</button>
-      
-      <button style={{ padding: "8px 15px", margin: "10px", color: "white", borderRadius: "8px ", backgroundColor: "red" }} onClick={removeText}>Remove</button>
 
+      <button style={{ padding: "8px 15px", margin: "10px", color: "white", borderRadius: "8px ", backgroundColor: "red" }} onClick={removeText}>Clear</button>
       
     </div>
   );
