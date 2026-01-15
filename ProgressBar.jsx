@@ -1,4 +1,5 @@
 const { useState } = React;
+const progressRoot = ReactDOM.createRoot(document.getElementById("progressroot"));
 
 function ProgressBar() {
   const [progress, setProgress] = useState(10);
@@ -21,7 +22,7 @@ function ProgressBar() {
 
   return (
     <div>
-      <h1>Progress Bar </h1>
+      <h1>Progress Bar</h1>
       <div
         style={{
           width: "500px",
@@ -32,6 +33,8 @@ function ProgressBar() {
         }}
       >
         <div
+          key={progress}
+//by adding key when key changes rreact will remove these childs and add after changes(recongliation)
           style={{
             width: `${progress}%`,
             height: "40px",
@@ -55,10 +58,10 @@ function ProgressBar() {
         </p>
       </div>
       <div style={{ display: "flex", margin: "10px" }}>
-        <button style={{ margin: "10px" }} onClick={ReduceProgress}>
+        <button type="button" style={{ margin: "10px" }} onClick={ReduceProgress}>
           -10%
         </button>
-        <button style={{ margin: "10px" }} onClick={AddProgress}>
+        <button  style={{ margin: "10px" }} onClick={AddProgress}>
           +10%
         </button>
       </div>
@@ -66,5 +69,4 @@ function ProgressBar() {
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<ProgressBar />);
+progressRoot.render(<ProgressBar />);
