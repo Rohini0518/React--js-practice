@@ -23,10 +23,13 @@ export default function PrctUseState() {
   const [rho, setRho] = useState(55);
   const [objState, setObjState] = useState({ uName: "rho", uNum: 2 });
   const [arrState, setArrState] = useState([2, 4, 5, 6]);
-      console.log("checkin asyncstate")
+  console.log("checkin asyncstate before intail state");
 
-  const [checkAsync,setCheckAsync]=useState(44)
-      console.log("checkin asyncstate",checkAsync)
+  const [checkAsync, setCheckAsync] = useState(44);
+  console.log("checkin asyncstate after state", checkAsync);
+
+  //function calling in state-lazy initilizor means fn call only happens once in first render
+  const [lazyCompute, setLazyCompute] = useState(compute);
 
   console.log(" very beggining", counter, rho, objState);
 
@@ -51,15 +54,31 @@ export default function PrctUseState() {
     setArrState([...arrState, counter]);
   }
 
-  function checkasyncState(){
-    console.log("checkin async fn")
+  function checkasyncState() {
+    console.log("checkin async fn-initial state", checkAsync);
     //initial=44
-  setCheckAsync(checkAsync+1)//45
-  setCheckAsync((p)=>p+5)//44+2=46--
-  setCheckAsync(checkAsync+3)//44+3=47
-  //   setCheckAsync((p)=>p-6)//47-6=38--
-
+    setCheckAsync(checkAsync + 1); //45
+    setCheckAsync((p) => {
+      console.log(p, "p+5 ", p + 5);
+      return p + 5;
+    }); //45+5=50--
+    setCheckAsync(checkAsync + 3); //44+3=47
+    setCheckAsync((p) => {
+      console.log(p, "p-14 ", p - 14);
+      return p - 14;
+    }); //47-14=33--
   }
+  //lazy initilization:
+
+  function compute() {
+    let sum = 0;
+    for (let i = 1; i <= 100; i++) {
+      sum += i;
+    }
+    console.log("counter funciton in lazy", sum);
+    return sum;
+  }
+
   return (
     <>
       <h1> React</h1>
@@ -86,8 +105,14 @@ export default function PrctUseState() {
         <button onClick={arrStateFn}>arrState</button>
       </div>
       <div>
-         <p>check Async State:{checkAsync}</p>
+        <p>check Async State:{checkAsync}</p>
         <button onClick={checkasyncState}>checkAsync working of state</button>
+      </div>
+      <div>
+        <p>lazy compute:{lazyCompute}</p>
+        <button onClick={() => setLazyCompute((p) => p + 2)}>
+          Lazy Compute bn
+        </button>
       </div>
     </>
   );
