@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 //   let count = 0;// without storing it on top of function always when tha app render it will become zero only
 
@@ -23,15 +23,24 @@ export default function PrctUseState() {
   const [rho, setRho] = useState(55);
   const [objState, setObjState] = useState({ uName: "rho", uNum: 2 });
   const [arrState, setArrState] = useState([2, 4, 5, 6]);
-  console.log("checkin asyncstate before intail state");
-
   const [checkAsync, setCheckAsync] = useState(44);
-  console.log("checkin asyncstate after state", checkAsync);
-
   //function calling in state-lazy initilizor means fn call only happens once in first render
   const [lazyCompute, setLazyCompute] = useState(compute);
 
   console.log(" very beggining", counter, rho, objState);
+
+useEffect(()=>{
+  console.log("no dependency  useeffect runs")
+},)
+
+useEffect(()=>{
+  console.log(" useeffect runs with empty []")
+},[])
+
+useEffect(()=>{
+  console.log("empty useeffect runs [counter-rho]")
+},[rho])
+
 
   function incrementPrimitiveState() {
     console.log("before from state  -", counter);
