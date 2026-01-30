@@ -5,6 +5,7 @@ import "../css/styleCard.css";
 export default function ReviseUseEffect() {
   const [data, setData] = useState([]);
   const [isLoading,setIsLoading]=useState(true)
+ const [count,setCount]=useState(8);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +34,11 @@ export default function ReviseUseEffect() {
 
   },[data])
 
+  useEffect(()=>{
+   console.log("count in useeffect 2+1")
+    // setCount((p)=>p+5)
+  },[count])
+
   return (
     <>
       <div className="fashion-wrapper">
@@ -41,10 +47,14 @@ export default function ReviseUseEffect() {
         <h4 className="subtitle">sectionSubtitle</h4>
         <p className="emoji">(❁´◡`❁)</p>
       </div>
+      <div>
+        <p>count:{count}  </p>
+        <button onClick={()=>setCount(count+1)}>chnageCount</button>
+      </div>
     {isLoading ?<div>Loading----</div>:
       <div className="product-grid">
         {data.map((product) => (
-          <div className="product-card" key={product.id}>
+          <div className="product-card" key={product.title}>
             <img
               src={product.image}
               alt={product.title}
