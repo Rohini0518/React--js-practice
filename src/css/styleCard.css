@@ -1,0 +1,71 @@
+.fashion-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+}
+
+.fashion-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.emoji {
+  color: red;
+  font-size: 1.2rem;
+}
+
+.product-grid {
+  margin: 10px;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f9f8f8;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+.product-img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 5px;
+
+}
+
+.product-title {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 22px;
+}
+.product-price {
+  margin-top: 5px;
+  font-weight: 600;
+    font-size: 18px;
+
+}
