@@ -6,6 +6,7 @@ export default function ReviseUseEffect() {
   const [data, setData] = useState([]);
   const [isLoading,setIsLoading]=useState(true)
  const [count,setCount]=useState(8);
+ const[age,setAge]=useState(24)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,18 +26,24 @@ export default function ReviseUseEffect() {
           fetchData();
     }, []);
 
-  useEffect(()=>{
-    console.log("use effect empty ",isLoading)
-  },[])
-  useEffect(()=>{
-    console.log("use effect data-usestate fetch ")
-        console.log(isLoading)
+  // useEffect(()=>{
+  //   console.log("use effect empty ",isLoading)
+  // },[])
 
-  },[data])
+  // useEffect(()=>{
+  //   console.log("use effect data-usestate fetch ")
+  //       console.log(isLoading)
+  // },[data])
 
   useEffect(()=>{
-   console.log("count in useeffect 2+1")
-    // setCount((p)=>p+5)
+   console.log("age in useeffect ")
+    // setCount((p)=>p+0.5)  
+    //causes infinite loopp 
+  },[age])
+
+   useEffect(()=>{
+   console.log("count in dependency ,age +1")
+    setAge((p)=>p+1)
   },[count])
 
   return (
@@ -50,6 +57,10 @@ export default function ReviseUseEffect() {
       <div>
         <p>count:{count}  </p>
         <button onClick={()=>setCount(count+1)}>chnageCount</button>
+      </div>
+      <div>
+        <p>age:{age}  </p>
+        <button onClick={()=>setAge(age-2)}>chnageAge</button>
       </div>
     {isLoading ?<div>Loading----</div>:
       <div className="product-grid">
