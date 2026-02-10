@@ -1,34 +1,27 @@
-import React, { useState } from "react";
-
+import React,{useState} from "react";
+import "./styles.css";
+import { Menu } from 'lucide-react';
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  function handleClick() {
-    setIsOpen((p) => !p);
-  }
+  function handleToggle() {
+  setIsOpen((p)=>!p)
+}
 
   return (
-    <div className="sidebar" data-testid="sidebar">
-      <button
-        className="toggle-btn"
-        data-testid="btn-toggle"
-        onClick={handleClick}
-      >
-        <span data-testid="icon-menu">
-          {isOpen ? "✖" : "☰"}
-        </span>
+    <div className={`sidebar ${isOpen?"open":""}`}  data-testid="sidebar">
+      <button className="toggle-btn" onClick={handleToggle} data-testid="btn-toggle">
+          <Menu data-testid="icon-menu" />
       </button>
 
-      {isOpen && (
-        <nav className="nav-menu" data-testid="nav-menu">
-          <ul className="nav-list">
-            <li className="nav-item">Home</li>
-            <li className="nav-item">About</li>
-            <li className="nav-item">Services</li>
-            <li className="nav-item">Contact</li>
-          </ul>
-        </nav>
-      )}
+      { isOpen && <nav className="nav-menu" data-testid="nav-menu">
+        <ul className="nav-list">
+          <li className="nav-item" data-testid="nav-item-home">Home</li>
+          <li className="nav-item" data-testid="nav-item-about">About</li>
+          <li className="nav-item" data-testid="nav-item-services">Services</li>
+          <li className="nav-item" data-testid="nav-item-contact">Contact</li>
+        </ul>
+      </nav>}
     </div>
   );
 }
