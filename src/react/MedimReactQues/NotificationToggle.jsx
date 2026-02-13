@@ -58,38 +58,46 @@ export default function NotificationBell() {
 
   // TODO: Implement handleBellClick function
   const handleBellClick = () => {
-    // TODO: Toggle dropdown open/closed state
+    setIsOpen((p)=>!p)
   };
+ console.log(notificationList) 
 
   // TODO: Implement handleNotificationClick function
   const handleNotificationClick = (notificationId) => {
-    // TODO: Mark specific notification as read
-    // - Find notification by ID
-    // - Update isRead property to true
-    // - Update notificationList state
+  setNotificationList((prev)=>prev.map((notif)=>notif.id===notificationId?{...notif,isRead:true}:notif))
+ console.log(notificationList) 
   };
 
   // TODO: Implement handleMarkAllAsRead function
   const handleMarkAllAsRead = () => {
-    // TODO: Mark all notifications as read
-    // - Update all notifications to have isRead: true
-    // - Update notificationList state
+    setNotificationList((prev)=>prev.map((notif)=>({...notif,isRead:true})))
   };
 
   // TODO: Implement formatTimestamp function
   const formatTimestamp = (timestamp) => {
-    // TODO: Format timestamp for display
-    // - Return the timestamp as is for now
-    // - Could add more formatting logic later
+return timestamp
   };
 
   // TODO: Implement click outside handler
   useEffect(() => {
-    // TODO: Add event listener for clicks outside dropdown
-    // - Close dropdown when clicking outside
-    // - Use dropdownRef to check if click is outside
-    // - Clean up event listener on unmount
-  }, []);
+     if (!isOpen) return
+
+     function handleClickOutside(event) {
+      console.log("handleoutside click")
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target)
+    ) {
+      setIsOpen(false);
+    }
+  }
+
+    document.addEventListener("mousedown",handleClickOutside)
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+  }, [isOpen]);
 
   return (
     <div className="notification-container" role="main">
