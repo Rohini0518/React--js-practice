@@ -59,3 +59,86 @@ setCart(prev => {
     );
   }
 });
+
+//4
+const [wishlist, setWishlist] = useState([
+  { id: 1, name: "Laptop" }
+]);
+
+const product = { id: 2, name: "Mouse" };
+
+// Task 5
+// You receive a product when user clicks heart icon:
+// If product already exists in wishlist → remove it
+// If product does NOT exist → add it
+// So it behaves like a toggle.
+
+
+setWishlist(prev => {
+  const exists = prev.some(item => item.id === product.id);
+
+  if (exists) {
+    return prev.filter(item => item.id !== product.id);
+  } else {
+    return [...prev, product];
+  }
+});
+
+
+// Task:6
+// If product already exists in cart → increase quantity
+// Else → add new item with quantity 1
+
+const [cart2, setCart2] = useState([
+  { id: 1, name: "Laptop", quantity: 1 }
+]);
+
+
+
+
+const product2 = { id: 1, name: "Laptop" };
+
+
+
+setCart2(prev => {
+  const exists = prev.some(item => item.id === product.id);
+
+  if (exists) {
+    return prev.map(item =>
+      item.id === product.id
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
+  } else {
+    return [
+      ...prev,
+      { ...product, quantity: 1 }
+    ];
+  }
+});
+
+
+// Task 7
+// Change only city to "Chennai".
+const [state, setState] = useState({
+  user: {
+    name: "Asha",
+    address: {
+      city: "Hyderabad",
+      pincode: 500001
+    }
+  },
+  theme: "light"
+});
+
+
+setState(prev => ({
+  ...prev,
+  user: {
+    ...prev.user,
+    address: {
+      ...prev.user.address,
+      city: "Chennai"
+    }
+  }
+}));
