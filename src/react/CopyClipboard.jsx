@@ -1,9 +1,23 @@
 import { useState } from "react";
 
 function CopyClipboard() {
+  const [result, setResult] = useState("")
+  const [text, setText] = useState("")
 
-  
+  function handleCopy(value) {
+    if (!value.trim()) {
+      setResult("Type some values to copy");
+    } else {
+      navigator.clipboard.writeText(value);
+      setResult("Copied!");
 
+      setTimeout(() => {
+        setResult("");
+      }, 2000);
+    }
+  }
+
+ 
   return (
     <div className="copyToClipboard">
       <h1>Copy to Clipboard</h1>
@@ -18,6 +32,8 @@ function CopyClipboard() {
               id="text"
               data-testid="input-field"
               placeholder="Type Something"
+              value={text}
+              onChange={(e)=>setText(e.target.value)}
             />
           </label>
           <button
@@ -29,6 +45,13 @@ function CopyClipboard() {
           >
             Copy
           </button>
+          {result === "Copied!" && (
+            <p data-testid="copied-message">{result}</p>
+          )}
+
+          {result !== "Copied!" && result && (
+            <p data-testid="error-message">{result}</p>
+          )}
         </div>
       </div>
     </div>
