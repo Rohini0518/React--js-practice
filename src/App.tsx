@@ -1,14 +1,19 @@
 import "./App.css";
-import AgeCalculator from "./react/AgeCalculator";
-import FormSubmit from "./react/FormSubmit";
+// import CopyClipboard from "./react/CopyClipboard";
+import URLValidator from "./react/urlValidator2";
+// import AgeCalculator from "./react/AgeCalculator";
+// import FormSubmit from "./react/FormSubmit";
 
 function App() {
  console.log("app -file run")
   return (
     <>
       <h1>Vite + React</h1>
-  <FormSubmit/>
-  <AgeCalculator/>
+  {/* <FormSubmit/> */}
+  {/* <AgeCalculator/> */}
+  {/* <CopyClipboard/>
+   */}
+   <URLValidator/>
     </>
   );
 }

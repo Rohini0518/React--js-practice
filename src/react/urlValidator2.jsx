@@ -11,9 +11,9 @@ function URLValidator() {
       if (!value.includes("://")) return false;
 
       const url = new URL(value);
-
+       console.log(url,"new url obj")
       const isHTTP = url.protocol === "http:" || url.protocol === "https:";
-
+       console.log(isHTTP,"isHttp:url.protocol",url.protocol,"url.hostname-",url.hostname,url.host)
       const hasValidHost =
         url.hostname === "localhost" || /\w+\.\w+/.test(url.hostname);
 
