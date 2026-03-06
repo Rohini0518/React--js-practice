@@ -4,33 +4,43 @@ function URLValidator() {
   const [input, setInput] = useState("");
   const [isValid, setIsValid] = useState(null);
 
-  function validateUrl() {
-    e.preventDefault();
-    if (input.trim() === "") { setIsValid(false); return; } 
+  function validateUrl(value) {
+    const val = value.trim();
+    if (val === "") {
+      return false;
+    }
 
-    if (input.startsWith("https://") || input.startsWith("http://")) {
-      const domain = input.replace("http://", "").replace("https://", "")
-      if (!domain.includes(" ") && (domain.includes(".") || domain.startsWith("localhost")) ) {
-      setIsValid(true)
+    if (val.startsWith("http://") || val.startsWith("https://")) {
+      const domain = val.replace("https://", "").replace("http://", "");
+
+      if (
+        !domain.includes(" ") &&
+        (domain.includes(".") || domain.startsWith("localhost"))
+      ) {
+        return true;
+      } else {
+        return false;
       }
-     else {
-  setIsValid(false)
-}
-   }
+    } else {
+      return false;
+    }
+  }
 
-    else {
-  setIsValid(false)
-}
+  function handleChange(e) {
+    const value = e.target.value;
 
-
+    setInput(value);
+    setIsValid(validateUrl(value));
   }
 
   return (
     <div>
       <h1>URL Validator</h1>
 
-      <form className="container" onSubmit={validateUrl}>
-        <label htmlFor="url" style={{ margin: "10px" }}>Url:</label>
+      <div className="container">
+        <label htmlFor="url" style={{ margin: "10px" }}>
+          Url:
+        </label>
 
         <input
           id="url"
@@ -38,25 +48,16 @@ function URLValidator() {
           type="text"
           placeholder="Enter Url to validate"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleChange}
           data-testid="url-input"
         />
 
-        <button
-          type="submit"
-          style={{ margin: "10px", backgroundColor: "lightblue" }}
-        >
-          Validate
-        </button>
-
-        <p
-          data-testid="result"
-          style={{ color: isValid ? "green" : "red" }}
-        >
+        <p data-testid="result" style={{ color: isValid ? "green" : "red" }}>
           {isValid === null ? "" : isValid ? "Valid URL" : "Invalid URL"}
         </p>
-      </form>
+      </div>
     </div>
   );
 }
+
 export default URLValidator;
