@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <body>
+    <script>
+      function f1() {
+        console.log("f1");
+      }
+
+      function f2() {
+        console.log("f2");
+      }
+
+      function f3() {
+        console.log("f3");
+      }
+
+      f1();
+      f2();
+      f3();
+
+      function call1() {
+        console.log("call1");
+      }
+      function call2() {
+        console.log("call2");
+      }
+
+      function main() {
+        console.log("main");
+        setTimeout(call1, 0);
+        new Promise(function (resolve, reject) {
+          resolve("i am promise");
+        }).then((resolve) => console.log("resolve resut"));
+        call2();
+      }
+      main();
+    </script>
+    <h1>ASYNC JAVSCRIPT</h1>
+  </body>
+</html>
